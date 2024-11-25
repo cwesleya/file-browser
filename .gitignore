@@ -1,0 +1,52 @@
+# Ignore build outputs
+bin/
+obj/
+# Ignore IDE-related files
+.vscode/
+.idea/
+.vs/
+
+# Ignore node_modules
+node_modules/
+
+# Ignore logs
+logs/
+*.log
+npm-debug.log*
+
+# Ignore environment variables
+.env
+
+# Ignore build output
+dist/
+build/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore coverage reports
+coverage/
+
+# Ignore dependency directories
+jspm_packages/
+
+# Ignore compiled files
+*.out
+*.class
+*.pyc
+*.o
+*.so
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.bak
+*.orig
+*.save
+
+# Ignore package-lock and yarn.lock
+package-lock.json
+yarn.lock
+
+.DS_Store

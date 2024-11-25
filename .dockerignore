@@ -1,0 +1,28 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore IDE-related files
+.vscode/
+.idea/
+.vs/
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.bak
+*.orig
+*.save
+
+# Ignore environment variables
+.env
+
+# Ignore coverage reports
+coverage/
+
+# Ignore node_modules (if using Node.js)
+node_modules/
