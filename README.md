@@ -95,7 +95,7 @@ curl -X DELETE "http://localhost:5000/api/test/delete?name=file.txt&isDirectory=
 
 **Method**: `GET`
 
-**Response**: The currently configured home directory path.
+**Response**: The currently configured home directory path and whether it exists.
 
 **Example**:
 ```sh
