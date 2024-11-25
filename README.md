@@ -175,7 +175,7 @@ docker build -t filebrowser .
 ```sh
 docker run -p 8080:80 filebrowser
 ```
-4. You can pass in your own environment valirbles to docker or specify other profiles like this:
+4. You can pass in your own environment variables to docker or specify other profiles like this:
 ```sh
 # Configure by environment variables
 docker run -p 8080:80 -e HomeDirectory=/custom/path -e ASPNETCORE_ENVIRONMENT=Production filebrowser
