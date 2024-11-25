@@ -41,7 +41,8 @@ namespace FileBrowser.Controllers
         {
             if (path.StartsWith("~"))
             {
-                var homeDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+                var homeDirectory = Environment
+                    .GetFolderPath(Environment.SpecialFolder.UserProfile);
                 path = Path.Combine(homeDirectory, path.TrimStart('~', '/'));
             }
             return path;
@@ -55,7 +56,11 @@ namespace FileBrowser.Controllers
         /// <param name="pageSize">The number of items per page.</param>
         /// <returns>The contents of the directory.</returns>
         [HttpGet(AppConstants.BrowseEndpoint)]
-        public IActionResult Browse([FromQuery] string? path = "", [FromQuery] int page = 1, [FromQuery] int pageSize = AppConstants.DefaultPageSize)
+        public IActionResult Browse(
+            [FromQuery] string? path = "", 
+            [FromQuery] int page = 1, 
+            [FromQuery] int pageSize = AppConstants.DefaultPageSize
+        )
         {
             var fullPath = Path.Combine(_homeDirectory, path ?? string.Empty);
 
@@ -64,8 +69,12 @@ namespace FileBrowser.Controllers
                 return NotFound(AppConstants.DirectoryNotFound);
             }
 
-            var directoriesQuery = Directory.EnumerateDirectories(fullPath).Select(d => new DirectoryItem(new DirectoryInfo(d).Name, d));
-            var filesQuery = Directory.EnumerateFiles(fullPath).Select(f => new FileItem(new FileInfo(f).Name, f, new FileInfo(f).Length));
+            var directoriesQuery = Directory
+                .EnumerateDirectories(fullPath)
+                .Select(d => new DirectoryItem(new DirectoryInfo(d).Name, d));
+            var filesQuery = Directory
+                .EnumerateFiles(fullPath)
+                .Select(f => new FileItem(new FileInfo(f).Name, f, new FileInfo(f).Length));
 
             if (pageSize > 0)
             {
@@ -87,15 +96,20 @@ namespace FileBrowser.Controllers
         /// <param name="pageSize">The number of items per page.</param>
         /// <returns>The search results.</returns>
         [HttpGet(AppConstants.SearchEndpoint)]
-        public IActionResult Search([FromQuery] string? query = "", [FromQuery] int page = 1, [FromQuery] int pageSize = AppConstants.DefaultPageSize)
+        public IActionResult Search(
+            [FromQuery] string? query = "", 
+            [FromQuery] int page = 1, 
+            [FromQuery] int pageSize = AppConstants.DefaultPageSize
+        )
         {
             if (string.IsNullOrWhiteSpace(query))
             {
                 return Browse(page: page, pageSize: pageSize);
             }
 
-            var filesQuery = Directory.EnumerateFiles(_homeDirectory, $"*{query}*", SearchOption.AllDirectories)
-                                      .Select(f => new FileItem(new FileInfo(f).Name, f, new FileInfo(f).Length));
+            var filesQuery = Directory
+                .EnumerateFiles(_homeDirectory, $"*{query}*", SearchOption.AllDirectories)
+                .Select(f => new FileItem(new FileInfo(f).Name, f, new FileInfo(f).Length));
 
             if (pageSize > 0)
             {
