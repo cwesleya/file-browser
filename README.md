@@ -161,7 +161,7 @@ dotnet run
 ```
 or
 ```sh
-dotnet run --launch-profile development
+dotnet run --launch-profile Development
 ```
 
 **Docker**
