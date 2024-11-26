@@ -144,8 +144,8 @@ function displayDirectoryContents(data, path, page, pageSize) {
     headerRow.innerHTML = '<th>Name</th><th>Type</th><th>Size</th><th>Actions</th>';
     table.appendChild(headerRow);
 
-    if (data.directories) {
-        data.directories.forEach(dir => {
+    if (data.directoriesQuery) {
+        data.directoriesQuery.forEach(dir => {
             const row = document.createElement('tr');
             row.innerHTML = `<td>${dir.name}</td><td>Directory</td><td>-</td><td><button onclick="confirmDelete('${dir.name}', true)">Delete</button></td>`;
             row.onclick = () => browseDirectory(`${dir.path}`);
@@ -153,8 +153,8 @@ function displayDirectoryContents(data, path, page, pageSize) {
         });
     }
 
-    if (data.files) {
-        data.files.forEach(file => {
+    if (data.filesQuery) {
+        data.filesQuery.forEach(file => {
             const row = document.createElement('tr');
             row.innerHTML = `<td>${file.name}</td><td>File</td><td>${file.size}</td><td><button onclick="deleteItem('${file.name}', false)">Delete</button></td>`;
             table.appendChild(row);
@@ -165,7 +165,7 @@ function displayDirectoryContents(data, path, page, pageSize) {
     addTableSortListeners();
 
     // Add pagination controls
-    const totalItems = (data.directories ? data.directories.length : 0) + (data.files ? data.files.length : 0);
+    const totalItems = (data.directoriesQuery?.length || 0) + (data.filesQuery?.length || 0);
     const paginationControls = document.createElement('div');
     paginationControls.className = 'pagination-controls';
     paginationControls.innerHTML = `
@@ -193,7 +193,7 @@ function displaySearchResults(data, query, page, pageSize) {
     headerRow.innerHTML = '<th>Name</th><th>Type</th><th>Size</th><th>Actions</th>';
     table.appendChild(headerRow);
 
-    data.forEach(file => {
+    data.filesQuery?.forEach(file => {
         const row = document.createElement('tr');
         row.innerHTML = `<td>${file.name}</td><td>File</td><td>${file.size}</td><td><button onclick="deleteItem('${file.name}', false)">Delete</button></td>`;
         table.appendChild(row);
@@ -203,7 +203,7 @@ function displaySearchResults(data, query, page, pageSize) {
     addTableSortListeners();
 
     // Add pagination controls
-    const totalItems = data.length;
+    const totalItems = data.filesQuery?.length || 0;
     const paginationControls = document.createElement('div');
     paginationControls.className = 'pagination-controls';
     paginationControls.innerHTML = `

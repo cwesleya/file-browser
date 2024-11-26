@@ -82,10 +82,7 @@ namespace FileBrowser.Controllers
                 filesQuery = filesQuery.Skip((page - 1) * pageSize).Take(pageSize);
             }
 
-            var directories = directoriesQuery.ToList();
-            var files = filesQuery.ToList();
-
-            return Ok(new { directories, files });
+            return Ok(new { directoriesQuery, filesQuery });
         }
 
         /// <summary>
@@ -116,9 +113,7 @@ namespace FileBrowser.Controllers
                 filesQuery = filesQuery.Skip((page - 1) * pageSize).Take(pageSize);
             }
 
-            var files = filesQuery.ToList();
-
-            return Ok(files);
+            return Ok(new { filesQuery });
         }
 
         /// <summary>
